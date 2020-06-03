@@ -26,8 +26,8 @@ func (q *SelectQuery) Build() string {
 		q.FromCommand,
 	)
 
-	if isNotNil(q.WhereClause.Value) {
-		query += fmt.Sprintf(" where %s", q.WhereClause.Value)
+	if isNotNil(q.WhereClause) {
+		query += fmt.Sprintf(" where %s", q.WhereClause)
 	}
 
 	if len(q.GroupByClause) > 0 {

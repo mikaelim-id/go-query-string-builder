@@ -5,9 +5,7 @@ import (
 	"reflect"
 )
 
-type WhereClause struct {
-	Value string
-}
+type WhereClause string
 
 func (q *WhereClause) AppendAndEqualCondition(column string, value interface{}) {
 	if isNotNil(value) {
@@ -23,13 +21,20 @@ func (q *WhereClause) AppendAndEqualCondition(column string, value interface{}) 
 }
 
 func (q *WhereClause) AppendAndCondition(query string) {
-	if q.Value == "" {
-		q.Value = query
-	} else {
-		q.Value += fmt.Sprintf(` and %s`, query)
+	if q == nil {
+		return
 	}
-}
 
+	currentValue := *q
+
+	if currentValue == "" {
+		currentValue = WhereClause(query)
+	} else {
+		currentValue += WhereClause(fmt.Sprintf(` and %s`, query))
+	}
+
+	*q = currentValue
+}
 
 func (q *WhereClause) AppendOrEqualCondition(column string, value interface{}) {
 	if isNotNil(value) {
@@ -45,9 +50,17 @@ func (q *WhereClause) AppendOrEqualCondition(column string, value interface{}) {
 }
 
 func (q *WhereClause) AppendOrCondition(query string) {
-	if q.Value == "" {
-		q.Value = query
-	} else {
-		q.Value += fmt.Sprintf(` or %s`, query)
+	if q == nil {
+		return
 	}
+
+	currentValue := *q
+
+	if currentValue == "" {
+		currentValue = WhereClause(query)
+	} else {
+		currentValue += WhereClause(fmt.Sprintf(` or %s`, query))
+	}
+
+	*q = currentValue
 }

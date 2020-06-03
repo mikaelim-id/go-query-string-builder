@@ -17,9 +17,6 @@ func TestSelectQuery(t *testing.T) {
 	selectQuery := SelectQuery{
 		SelectStatement: []string{"name", "address", "phone", "date_of_birth", "location_id"},
 		FromCommand:     "test_table",
-		WhereClause: WhereClause{
-
-		},
 		GroupByClause:   []string{"name", "address"},
 		OrderByClause: []OrderBy{
 			{

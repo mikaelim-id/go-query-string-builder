@@ -53,7 +53,7 @@ func (q *UpdateQuery) Build() string {
 	}
 
 	if isNotNil(q.WhereClause) {
-		query += fmt.Sprintf(" where %s", q.WhereClause.Value)
+		query += fmt.Sprintf(" where %s", q.WhereClause)
 	}
 
 	return query

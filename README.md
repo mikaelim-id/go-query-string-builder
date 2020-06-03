@@ -10,25 +10,23 @@ import "github.com/mikaelim-id/go-query-string-builder/query"
 #### Init
 ```go
 selectQuery := SelectQuery{
-		SelectStatement: []string{"*",},
-		FromCommand:     "test_table",
-        WhereClause: WhereClause{
-           Value: "name='adam'",
-        },
-		GroupByClause:   []string{"name"},
-		OrderByClause: []OrderBy{
-			{
-				Field: "name",
-				Asc:   false,
-			},
-			{
-				Field: "address",
-				Asc:   true,
-			},
-		},
-		Limit:  5,
-		Offset: nil,
-	}
+        SelectStatement: []string{"*",}, 
+        FromCommand:     "test_table",
+        WhereClause:     "name='adama", 
+        GroupByClause:   []string{"name"}, 
+        OrderByClause: []OrderBy{
+            {
+                Field: "name",
+                Asc:   false,
+            },
+            {
+                Field: "address",
+                Asc:   true,
+            },
+        }, 
+        Limit:  5, 
+        Offset: nil,
+}
 ```
 
 #### AppendAndEqualCondition
@@ -102,13 +100,11 @@ fmt.Println(selectQuery.build())
 #### Init
 ```go
 updateQuery := UpdateQuery{
-		UpdateStatement: "test_table",
-    SetCommand: map[string]string{
-      "name": "new name value",
-    },
-    WhereClause: WhereClause{
-       Value: "name='adam'",
-    },
+        UpdateStatement: "test_table",
+        SetCommand: map[string]string{
+          "name": "new name value",
+        }, 
+        WhereClause: "name='adam'",
 }
 ```
 
