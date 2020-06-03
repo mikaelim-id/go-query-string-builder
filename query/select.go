@@ -26,9 +26,7 @@ func (q *SelectQuery) Build() string {
 		q.FromCommand,
 	)
 
-	if isNotNil(q.WhereClause) {
-		fmt.Println(q.WhereClause)
-		fmt.Println(len(q.WhereClause))
+	if len(q.WhereClause) > 0 {
 		query += fmt.Sprintf(" where %s", q.WhereClause)
 	}
 
