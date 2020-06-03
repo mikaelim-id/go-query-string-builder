@@ -8,7 +8,7 @@ import (
 type UpdateQuery struct {
 	UpdateStatement string
 	SetCommand      map[string]string
-	SharedQuery
+	WhereClause
 }
 
 func (q *UpdateQuery) AppendSet(column string, value interface{}) {
@@ -53,7 +53,7 @@ func (q *UpdateQuery) Build() string {
 	}
 
 	if isNotNil(q.WhereClause) {
-		query += fmt.Sprintf(" where %s", q.WhereClause)
+		query += fmt.Sprintf(" where %s", q.WhereClause.Value)
 	}
 
 	return query

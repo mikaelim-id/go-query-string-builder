@@ -17,6 +17,9 @@ func TestSelectQuery(t *testing.T) {
 	selectQuery := SelectQuery{
 		SelectStatement: []string{"name", "address", "phone", "date_of_birth", "location_id"},
 		FromCommand:     "test_table",
+		WhereClause: WhereClause{
+
+		},
 		GroupByClause:   []string{"name", "address"},
 		OrderByClause: []OrderBy{
 			{
@@ -38,7 +41,6 @@ func TestSelectQuery(t *testing.T) {
 	selectQuery.AppendAndEqualCondition("pointer", &pointer)
 	selectQuery.AppendOrCondition(BuildGroupedOrCondition("location_id=1", "location_id=3"))
 	selectQuery.AppendAndCondition(BuildGroupedAndCondition("location_id=1", "location_id=3"))
-
 	assert.Equal(t, len(expectation), len(selectQuery.Build()))
 
 	expectation2 := "select name,address,phone,date_of_birth,location_id from test_table where name='test_name'"

@@ -12,7 +12,9 @@ import "github.com/mikaelim-id/go-query-string-builder/query"
 selectQuery := SelectQuery{
 		SelectStatement: []string{"*",},
 		FromCommand:     "test_table",
-    WhereClause:     "name='adama",
+        WhereClause: WhereClause{
+           Value: "name='adam'",
+        },
 		GroupByClause:   []string{"name"},
 		OrderByClause: []OrderBy{
 			{
@@ -104,8 +106,10 @@ updateQuery := UpdateQuery{
     SetCommand: map[string]string{
       "name": "new name value",
     },
-    WhereClause: "name='adam'",
-    }
+    WhereClause: WhereClause{
+       Value: "name='adam'",
+    },
+}
 ```
 
 #### AppendSet

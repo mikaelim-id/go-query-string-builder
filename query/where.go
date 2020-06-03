@@ -5,11 +5,11 @@ import (
 	"reflect"
 )
 
-type SharedQuery struct {
-	WhereClause     string
+type WhereClause struct {
+	Value string
 }
 
-func (q *SharedQuery) AppendAndEqualCondition(column string, value interface{}) {
+func (q *WhereClause) AppendAndEqualCondition(column string, value interface{}) {
 	if isNotNil(value) {
 		if reflect.ValueOf(value).Kind() == reflect.String ||
 			reflect.ValueOf(value).Kind() == reflect.Array {
@@ -22,16 +22,16 @@ func (q *SharedQuery) AppendAndEqualCondition(column string, value interface{}) 
 	}
 }
 
-func (q *SharedQuery) AppendAndCondition(query string) {
-	if q.WhereClause == "" {
-		q.WhereClause = query
+func (q *WhereClause) AppendAndCondition(query string) {
+	if q.Value == "" {
+		q.Value = query
 	} else {
-		q.WhereClause += fmt.Sprintf(` and %s`, query)
+		q.Value += fmt.Sprintf(` and %s`, query)
 	}
 }
 
 
-func (q *SharedQuery) AppendOrEqualCondition(column string, value interface{}) {
+func (q *WhereClause) AppendOrEqualCondition(column string, value interface{}) {
 	if isNotNil(value) {
 		if reflect.ValueOf(value).Kind() == reflect.String ||
 			reflect.ValueOf(value).Kind() == reflect.Array {
@@ -44,10 +44,10 @@ func (q *SharedQuery) AppendOrEqualCondition(column string, value interface{}) {
 	}
 }
 
-func (q *SharedQuery) AppendOrCondition(query string) {
-	if q.WhereClause == "" {
-		q.WhereClause = query
+func (q *WhereClause) AppendOrCondition(query string) {
+	if q.Value == "" {
+		q.Value = query
 	} else {
-		q.WhereClause += fmt.Sprintf(` or %s`, query)
+		q.Value += fmt.Sprintf(` or %s`, query)
 	}
 }

@@ -12,7 +12,7 @@ type SelectQuery struct {
 	OrderByClause   []OrderBy
 	Limit           int
 	Offset          *int
-	SharedQuery
+	WhereClause
 }
 
 type OrderBy struct {
@@ -26,8 +26,8 @@ func (q *SelectQuery) Build() string {
 		q.FromCommand,
 	)
 
-	if isNotNil(q.WhereClause) {
-		query += fmt.Sprintf(" where %s", q.WhereClause)
+	if isNotNil(q.WhereClause.Value) {
+		query += fmt.Sprintf(" where %s", q.WhereClause.Value)
 	}
 
 	if len(q.GroupByClause) > 0 {
