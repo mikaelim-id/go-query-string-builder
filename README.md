@@ -105,7 +105,7 @@ updateQuery := UpdateQuery{
       "name": "new name value",
     },
     WhereClause: "name='adam'",
-	}
+    }
 ```
 
 #### AppendSet
