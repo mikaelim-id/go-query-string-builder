@@ -2,14 +2,13 @@ package query
 
 import (
 	"fmt"
-	"reflect"
 	"strings"
 )
 
 type UpdateQuery struct {
 	UpdateStatement string
 	SetCommand      map[string]string
-	WhereClause     string
+	SharedQuery
 }
 
 func (q *UpdateQuery) AppendSet(column string, value interface{}) {
@@ -31,24 +30,6 @@ func (q *UpdateQuery) AppendSet(column string, value interface{}) {
 		}
 
 		q.SetCommand[column] = fmt.Sprintf(":%s", column)
-	}
-}
-
-func (q *UpdateQuery) AppendWhereEqual(column string, value interface{}) {
-	if isNotNil(value) {
-		if reflect.ValueOf(value).Kind() == reflect.Int {
-			q.AppendWhere(fmt.Sprintf(`%s=%d`, column, value))
-		} else {
-			q.AppendWhere(fmt.Sprintf(`%s='%s'`, column, value))
-		}
-	}
-}
-
-func (q *UpdateQuery) AppendWhere(query string) {
-	if q.WhereClause == "" {
-		q.WhereClause = query
-	} else {
-		q.WhereClause += fmt.Sprintf(` and %s`, query)
 	}
 }
 
