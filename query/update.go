@@ -33,6 +33,14 @@ func (q *UpdateQuery) AppendSet(column string, value interface{}) {
 	}
 }
 
+func (q *UpdateQuery) AppendSetAllowEmptyValue(column string, value interface{}) {
+	if q.SetCommand == nil {
+		q.SetCommand = make(map[string]string)
+	}
+
+	q.SetCommand[column] = fmt.Sprintf(":%s", column)
+}
+
 func (q *UpdateQuery) Build() string {
 	query := fmt.Sprintf(`update %s`,
 		q.UpdateStatement,

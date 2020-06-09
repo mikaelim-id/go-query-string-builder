@@ -30,7 +30,7 @@ selectQuery := SelectQuery{
 ```
 
 #### AppendAndEqualCondition
-Append **Field = Value** and condition in SelectQuery, will be ignored if value equal nil.
+Append **Field = Value** and condition in SelectQuery, will be ignored if value is empty.
 ```go
 selectQuery.AppendAndEqualCondition("name","name_value")
 ```
@@ -42,7 +42,7 @@ selectQuery.AppendAndCondition("name=name_value")
 ```
 
 #### AppendOrEqualCondition
-Append **Field = Value** or condition in SelectQuery, will be ignored if value equal nil.
+Append **Field = Value** or condition in SelectQuery, will be ignored if value is empty.
 ```go
 selectQuery.AppendOrEqualCondition("name","name_value")
 ```
@@ -109,13 +109,19 @@ updateQuery := UpdateQuery{
 ```
 
 #### AppendSet
-Append **Field = Value** set in UpdateQuery, will be ignored if value equal nil.
+Append **Field = Value** set in UpdateQuery, will be ignored if value is empty.
+```go
+updateQuery.AppendSet("address","new avenue")
+```
+
+#### AppendSetAllowEmptyValue
+Append **Field = Value** set in UpdateQuery.
 ```go
 updateQuery.AppendSet("address","new avenue")
 ```
 
 #### AppendAndEqualCondition
-Append **Field = Value** and condition in SelectQuery, will be ignored if value equal nil.
+Append **Field = Value** and condition in SelectQuery, will be ignored if value is empty.
 ```go
 selectQuery.AppendAndEqualCondition("name","name_value")
 ```
@@ -127,7 +133,7 @@ selectQuery.AppendAndCondition("name=name_value")
 ```
 
 #### AppendOrEqualCondition
-Append **Field = Value** or condition in SelectQuery, will be ignored if value equal nil.
+Append **Field = Value** or condition in SelectQuery, will be ignored if value is empty.
 ```go
 selectQuery.AppendOrEqualCondition("name","name_value")
 ```
