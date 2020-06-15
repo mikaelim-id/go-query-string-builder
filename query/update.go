@@ -33,7 +33,7 @@ func (q *UpdateQuery) AppendSet(column string, value interface{}) {
 	}
 }
 
-func (q *UpdateQuery) AppendSetAllowEmptyValue(column string, value interface{}) {
+func (q *UpdateQuery) AppendSetAllowEmptyValue(column string) {
 	if q.SetCommand == nil {
 		q.SetCommand = make(map[string]string)
 	}
