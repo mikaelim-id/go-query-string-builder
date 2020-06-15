@@ -38,6 +38,18 @@ func (q *UpdateQuery) AppendSetAllowEmptyValue(column string, value interface{})
 		q.SetCommand = make(map[string]string)
 	}
 
+	stringValue, valid := value.(string)
+	if valid && strings.Contains(stringValue, "jsonb_set") {
+		q.SetCommand[column] = value.(string)
+		return
+	}
+
+	stringPtrValue, valid := value.(*string)
+	if valid && strings.Contains(*stringPtrValue, "jsonb_set") {
+		q.SetCommand[column] = *stringPtrValue
+		return
+	}
+
 	q.SetCommand[column] = fmt.Sprintf(":%s", column)
 }
 
