@@ -14,6 +14,8 @@ func isNotNil(v interface{}) bool {
 		return v != ""
 	} else if reflect.ValueOf(v).Kind() == reflect.Array {
 		return v != uuid.Nil
+	} else if reflect.ValueOf(v).Kind() == reflect.Slice {
+		return reflect.ValueOf(v).Len() > 0
 	}
 
 	return v != nil
